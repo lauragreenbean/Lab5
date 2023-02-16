@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5: My To Do List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+   <div class="container">
+    <h1>My To Do List</h1>
+    <p>Here is a list of things I need to do:</p>
+    <form id="todoForm">
+        <div class="form-group">
+            <label for="todoItem">Add a new item to the list:</label>
+            <input type="text" class="form-control" id="todoItem" name="todoItem" placeholder="Enter a new item">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Item</button>
+
+    </form>
+
+    <!-- display a list of items in the todo list -->
+    <ul class="list-group" id="todoList">
+       
+    </ul>
+
+
+   </div>
+    
+</body>
+
+<script> 
+    // get the state of todo list from local storage
+    let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
+
+    //render the todo list
+    todoList.forEach(function(item){
+        let newItemElement = document.createElement('li');
+        newItemElement.classList.add('list-group-item');
+        newItemElement.innerText = item;
+        document.getElementById('todoList').appendChild(newItemElement);
+    });
+
+</script>
+
+</html>
