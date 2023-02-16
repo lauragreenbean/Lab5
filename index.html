@@ -21,6 +21,7 @@
     </form>
 
     <!-- display a list of items in the todo list -->
+    
     <ul class="list-group" id="todoList">
        
     </ul>
@@ -35,12 +36,37 @@
     let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 
     //render the todo list
+    // render the todo list
+
     todoList.forEach(function(item){
         let newItemElement = document.createElement('li');
         newItemElement.classList.add('list-group-item');
         newItemElement.innerText = item;
         document.getElementById('todoList').appendChild(newItemElement);
     });
+
+    //when we press the add item button, add the item to the list
+    document.getElementById('todoForm').addEventListener('submit', function(event){
+        event.preventDefault();
+        let newItem = document.getElementById('todoItem').value;
+        let newItemElement = document.createElement('li');
+        newItemElement.classList.add('list-group-item');
+        newItemElement.innerText = newItem;
+        document.getElementById('todoList').appendChild(newItemElement);
+
+    });
+
+    //after adding the item, add the item to the todoList local storage
+    todoList.push(newItem);
+
+    //save the todoList array to local storage
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+    
+    //clear the input field
+    document.getElementById('todoItem').value = '';
+
+
+
 
 </script>
 
