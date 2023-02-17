@@ -6,11 +6,47 @@
     <title>Lab 5: My To Do List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+<style>
+    body{
+        background-color: #F0F8FF;
+    }
+    h1{
+        text-align: center;
+    }
+    h6{
+        text-align: center;
+    }
+    .instructions{
+        text-align: center;
+    }
+   
+    .container{
+        width: 75%;
+        margin: 0 auto;
+    }
+    
+    .btn{
+        margin: 10px;
+        float: right;
+        /*put add item button on the right of enter new item
+        */
 
+    }
+    
+    .list-group-item{
+        margin: 10px;
+    }
+</style>
 <body>
    <div class="container">
     <h1>My To Do List</h1>
+    <h6>INSTRUCTIONS</h6>
+
+    <div class="instructions"
+    
+    <p>Click item once to mark as done. Double click an item to remove.</p>
     <p>Here is a list of things I need to do:</p>
+    </div>
     <form id="todoForm">
         <div class="form-group">
             <label form="todoItem">Add a new item to the list:</label>
@@ -22,7 +58,7 @@
     <!-- display a list of items in the todo list -->
     
     <ul class="list-group" id="todoList">
-              
+
     </ul>
     <br></br>
     <button id="removeBtn" class="btn btn-primary">Clear List</button>
@@ -41,12 +77,23 @@
     // render the todo list
     todoList.forEach(function(item){
         let newItemElement = document.createElement('li');
+   
+
 
         newItemElement.classList.add('list-group-item');
+        //append checkbox to the list item
+        let checkbox = document.createElement('list-group-item');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('float-left');
+        newItemElement.appendChild(checkbox);
+
+
         newItemElement.innerText = item;
         document.getElementById('todoList').appendChild(newItemElement);
+
     });
 
+ 
     //when we press the add item button, add the item to the list 
     document.getElementById('todoForm').addEventListener('submit', function(event){
         event.preventDefault();
@@ -70,34 +117,22 @@
 
     });
 
-    
- 
-    //add a button to remove all items from the list
-    document.getElementById('removeBtn').addEventListener('click', function(event){
-        event.preventDefault();
-        //remove all items from the todoList array
-        todoList = [];
-
-        //save the todoList array to local storage
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-
-        //remove all items from the DOM
-        document.getElementById('todoList').innerHTML = '';
+    //on click change todoItem to green
+    document.getElementById('todoList').addEventListener('click', function(event){
+        //change the background color of the item to gre
+       let markDone = event.target.style.backgroundColor = '#44FF33';
     });
 
-    
-  //add a button to remove the item from the list
-    let removeButton = document.createElement('button');
-        removeButton.classList.add('btn', 'btn-danger', 'float-right');
-        removeButton.innerText = 'Remove';
 
-    //add an event listener to the remove button
-    removeButton.addEventListener('click', function(event){
+//add a button to remove an item from the list
+    document.getElementById('todoList').addEventListener('dblclick', function(event){
+    event.preventDefault();
+        let newItem = event.target.innerText;
+        let newItemElement = event.target;
         //remove the item from the todoList array
         todoList = todoList.filter(function(item){
             return item !== newItem;
         });
-
         //save the todoList array to local storage
         localStorage.setItem('todoList', JSON.stringify(todoList));
 
@@ -105,10 +140,8 @@
         newItemElement.remove();
     });
 
-    //append the remove button to the list item
-    newItemElement.appendChild(removeButton);
+ //create event listener to change todoItem to green on click
 
-    //add an event listener to the todoList
 
 
 
