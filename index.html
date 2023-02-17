@@ -13,9 +13,8 @@
     <p>Here is a list of things I need to do:</p>
     <form id="todoForm">
         <div class="form-group">
-            <label for="todoItem">Add a new item to the list:</label>
+            <label form="todoItem">Add a new item to the list:</label>
             <input type="text" class="form-control" id="todoItem" name="todoItem" placeholder="Enter a new item">
-        </div>
         <button type="submit" class="btn btn-primary">Add Item</button>
 
     </form>
@@ -23,12 +22,15 @@
     <!-- display a list of items in the todo list -->
     
     <ul class="list-group" id="todoList">
-       
+              
     </ul>
-
+    <br></br>
+    <button id="removeBtn" class="btn btn-primary">Clear List</button>
 
    </div>
-    
+
+   
+
 </body>
 
 <script> 
@@ -39,17 +41,20 @@
     // render the todo list
     todoList.forEach(function(item){
         let newItemElement = document.createElement('li');
+
         newItemElement.classList.add('list-group-item');
         newItemElement.innerText = item;
         document.getElementById('todoList').appendChild(newItemElement);
     });
 
-    //when we press the add item button, add the item to the list
+    //when we press the add item button, add the item to the list 
     document.getElementById('todoForm').addEventListener('submit', function(event){
         event.preventDefault();
         let newItem = document.getElementById('todoItem').value;
         let newItemElement = document.createElement('li');
         newItemElement.classList.add('list-group-item');
+        
+
         newItemElement.innerText = newItem;
         document.getElementById('todoList').appendChild(newItemElement);
 
@@ -62,24 +67,77 @@
         //clear the input field
         document.getElementById('todoItem').value = '';
 
+
     });
 
     
- /*
-    //add a button to remove the item from the list
-    let removeButton = document.createElement('button');
-    removeButton.classList.add('btn', 'btn-danger', 'float-right');
+ 
+    //add a button to remove all items from the list
+    document.getElementById('removeBtn').addEventListener('click', function(event){
+        event.preventDefault();
+        //remove all items from the todoList array
+        todoList = [];
 
-    //add event listner to the remove button
+        //save the todoList array to local storage
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
+        //remove all items from the DOM
+        document.getElementById('todoList').innerHTML = '';
+    });
+
+    
+  //add a button to remove the item from the list
+    let removeButton = document.createElement('button');
+        removeButton.classList.add('btn', 'btn-danger', 'float-right');
+        removeButton.innerText = 'Remove';
+
+    //add an event listener to the remove button
     removeButton.addEventListener('click', function(event){
+        //remove the item from the todoList array
         todoList = todoList.filter(function(item){
             return item !== newItem;
         });
-        
+
+        //save the todoList array to local storage
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
         //remove the item from the DOM
         newItemElement.remove();
     });
- 
+
+    //append the remove button to the list item
+    newItemElement.appendChild(removeButton);
+
+    //add an event listener to the todoList
+
+
+
+   /*
+   document.getElementById('todoList').addEventListener('click', function(event){
+        event.preventDefault();
+        let newItem = event.target.innerText;
+        let newItemElement = event.target;
+        //remove the item from the todoList array
+        todoList = todoList.filter(function(item){
+            return item !== newItem;
+        });
+
+        //save the todoList array to local storage
+        localStorage.setItem('todoList', JSON.stringify(todoList));
+
+        //remove the item from the DOM
+        newItemElement.remove();
+    });
+
+*/
+
+
+
+    
+    
+    /*
+
+/* 
 
      add a button mark to mark the item as done
     let doneButton = document.createElement('button');
@@ -103,6 +161,15 @@
     newItemElement.appendChild(doneButton);
     newItemElement.appendChild(removeButton); */
 
+
+/* Details:
+
+√ This application should be able leverage browser APIs for storage.
+    A user should be able to create, read, update, and destroy items in the TODO list.
+    A user should be able to mark an item in the list as done.
+√ A user should be able to close the page and then return to the existing state.*/
+
 </script>
+
 
 </html>
