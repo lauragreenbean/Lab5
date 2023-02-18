@@ -12,46 +12,59 @@
     }
     h1{
         text-align: center;
+        background: rgb(144, 210, 243);
+        padding: 20px;
+        margin-top: 20px;
     }
-    h6{
-        text-align: center;
-    }
+    
     .instructions{
         text-align: center;
+        padding: 20px;
+        background-color: rgb(202, 221, 238);
     }
    
     .container{
         width: 75%;
         margin: 0 auto;
+        border-color: rgb(127, 208, 255);
+        border-style: dashed;
     }
-    
     .btn{
-        margin: 10px;
         float: right;
-        /*put add item button on the right of enter new item
-        */
-
+        padding-left: 30px;
+        padding-right: 30px;
+        margin-right: 1px;
+       
     }
     
     .list-group-item{
-        margin: 10px;
+        margin-top: 10px;
     }
 </style>
 <body>
    <div class="container">
     <h1>My To Do List</h1>
-    <h6>INSTRUCTIONS</h6>
 
     <div class="instructions"
-    
+    <h6>INSTRUCTIONS</h6>
+    <br></br>
+
     <p>Click item once to mark as done. Double click an item to remove.</p>
-    <p>Here is a list of things I need to do:</p>
+    <p>Here is a list of things I need to do ASAP:</p>
     </div>
     <form id="todoForm">
         <div class="form-group">
+            <br></br>
             <label form="todoItem">Add a new item to the list:</label>
-            <input type="text" class="form-control" id="todoItem" name="todoItem" placeholder="Enter a new item">
-        <button type="submit" class="btn btn-primary">Add Item</button>
+            <div class="row">
+                <div class="col-md-8">
+                <input type="text" class="form-control" id="todoItem" name="todoItem" placeholder="Enter a new item">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Add Item</button>
+        </div>
+        
+    </div>
 
     </form>
 
@@ -61,11 +74,8 @@
 
     </ul>
     <br></br>
-    <button id="removeBtn" class="btn btn-primary">Clear List</button>
 
    </div>
-
-   
 
 </body>
 
@@ -140,11 +150,6 @@
         newItemElement.remove();
     });
 
- //create event listener to change todoItem to green on click
-
-
-
-
    /*
    document.getElementById('todoList').addEventListener('click', function(event){
         event.preventDefault();
@@ -164,10 +169,6 @@
 
 */
 
-
-
-    
-    
     /*
 
 /* 
@@ -193,14 +194,6 @@
 //append the done button and the remove button to the list item
     newItemElement.appendChild(doneButton);
     newItemElement.appendChild(removeButton); */
-
-
-/* Details:
-
-√ This application should be able leverage browser APIs for storage.
-    A user should be able to create, read, update, and destroy items in the TODO list.
-    A user should be able to mark an item in the list as done.
-√ A user should be able to close the page and then return to the existing state.*/
 
 </script>
 
