@@ -29,12 +29,24 @@
         border-color: rgb(127, 208, 255);
         border-style: dashed;
     }
-    .btn{
+    #submit{
         float: right;
         padding-left: 30px;
         padding-right: 30px;
         margin-right: 1px;
+        background-color: rgb(62, 159, 207);
+        border: white;
        
+    }
+    #clearList{
+        float: left; 
+        margin-top: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+        background-color: rgb(226, 124, 124);
+        border: white;
+
+      
     }
     
     .list-group-item{
@@ -42,7 +54,8 @@
     }
 </style>
 <body>
-   <div class="container">
+    <div class="container" id="box">
+   <div class="container2">
     <h1>My To Do List</h1>
 
     <div class="instructions"
@@ -61,8 +74,9 @@
                 <input type="text" class="form-control" id="todoItem" name="todoItem" placeholder="Enter a new item">
             </div>
             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Add Item</button>
+                <button id= "submit" type="submit" class="btn btn-primary">Add Item</button>
         </div>
+
         
     </div>
 
@@ -73,10 +87,13 @@
     <ul class="list-group" id="todoList">
 
     </ul>
+    <button id="clearList" type="button" class="btn btn-primary">Clear All List Items</button>
+
     <br></br>
 
    </div>
 
+</div>
 </body>
 
 <script> 
@@ -134,7 +151,7 @@
     });
 
 
-//add a button to remove an item from the list
+//remove an item from the list
     document.getElementById('todoList').addEventListener('dblclick', function(event){
     event.preventDefault();
         let newItem = event.target.innerText;
@@ -150,50 +167,19 @@
         newItemElement.remove();
     });
 
-   /*
-   document.getElementById('todoList').addEventListener('click', function(event){
-        event.preventDefault();
-        let newItem = event.target.innerText;
-        let newItemElement = event.target;
-        //remove the item from the todoList array
-        todoList = todoList.filter(function(item){
-            return item !== newItem;
+    //clearList button should remove all items from DOM and local storage when clicked
+    document.getElementById('clearList').addEventListener('click', function(event){
+        //remove all all todoItems from the DOM
+        let todoItems = document.querySelectorAll('.list-group-item');
+        todoItems.forEach(function(item){
+            item.remove();
         });
-
+        //clear the todoList array
+        todoList = [];
         //save the todoList array to local storage
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-
-        //remove the item from the DOM
-        newItemElement.remove();
+        localStorage.setItem('todoList', JSON.stringify(todoList)); 
     });
-
-*/
-
-    /*
-
-/* 
-
-     add a button mark to mark the item as done
-    let doneButton = document.createElement('button');
-        doneButton.classList.add('btn', 'btn-success', 'float-right');
-
-    //add an event listener to the done button
-    doneButton.addEventListener('click', function(event){
-        //remove the item from the todoList array
-        todoList = todoList.filter(function(item){
-            return item !== newItem;
-        });
-
-        //save the todoList array to local storage
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-
-        //remove the item from the DOM
-        newItemElement.remove();
-    });
-
-//append the done button and the remove button to the list item
-    newItemElement.appendChild(doneButton);
-    newItemElement.appendChild(removeButton); */
+    
 
 </script>
 
